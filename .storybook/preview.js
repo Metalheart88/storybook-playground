@@ -1,7 +1,9 @@
 import React from 'react'
-import { addDecorator } from '@storybook/react'
+import { addDecorator, addParameters } from '@storybook/react'
 import { ThemeProvider, theme, CSSReset, Box } from '@chakra-ui/core'
 import { withConsole } from '@storybook/addon-console'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { withA11y } from '@storybook/addon-a11y'
 
 addDecorator(story => (
   <ThemeProvider theme={theme}>
@@ -20,4 +22,11 @@ export const parameters = {
   },
 }
 
-addDecorator((storyFn, context) => withConsole()(storyFn)(context))
+addDecorator((story, context) => withConsole()(story)(context))
+
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
+  a11y: withA11y,
+})
